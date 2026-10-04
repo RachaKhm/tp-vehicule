@@ -1,11 +1,14 @@
 package tn.esprit.tpvehicule.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import tn.esprit.tpvehicule.enums.CategorieVehicule;
-import tn.esprit.tpvehicule.enums.StatutVehicule;
+import tn.esprit.tpvehicule.enums.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.*;
 
 @Entity
 @Table(name = "vehicule")
@@ -13,7 +16,6 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Vehicule {
 
     @Id
@@ -21,14 +23,26 @@ public class Vehicule {
     private Long idVehicule;
 
     private String immatriculation;
+
     private String marque;
+
     private String modele;
 
-    @Enumerated(EnumType.STRING)
     private CategorieVehicule categorie;
 
     private BigDecimal tarifJournalier;
 
-    @Enumerated(EnumType.STRING)
     private StatutVehicule statut;
+
+    @ManyToOne
+    private Agence agence;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
+    private Set<Reservation> reservations;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicule")
+    private Set<Maintenance> maintenances;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Equipement> equipements;
 }

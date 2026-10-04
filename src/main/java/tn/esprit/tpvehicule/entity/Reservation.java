@@ -1,10 +1,14 @@
 package tn.esprit.tpvehicule.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import tn.esprit.tpvehicule.enums.StatutReservation;
+import tn.esprit.tpvehicule.enums.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Table(name = "reservation")
@@ -12,16 +16,25 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReservation;
+    private Long id;
 
     private LocalDate dateDebut;
+
     private LocalDate dateFin;
 
     @Enumerated(EnumType.STRING)
     private StatutReservation statut;
+
+    @ManyToOne
+    private Client client;
+
+    @ManyToOne
+    private Vehicule vehicule;
+
+    @OneToOne
+    private Contrat contrat;
 }

@@ -1,11 +1,15 @@
 package tn.esprit.tpvehicule.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import tn.esprit.tpvehicule.enums.ModePaiement;
+import tn.esprit.tpvehicule.enums.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Table(name = "paiement")
@@ -13,16 +17,19 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Paiement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPaiement;
+    private Long id;
 
     private BigDecimal montant;
+
     private LocalDate datePaiement;
 
     @Enumerated(EnumType.STRING)
     private ModePaiement modePaiement;
+
+    @ManyToOne
+    private Contrat contrat;
 }

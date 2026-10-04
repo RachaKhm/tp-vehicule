@@ -1,8 +1,13 @@
 package tn.esprit.tpvehicule.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import tn.esprit.tpvehicule.enums.RoleEmploye;
+import tn.esprit.tpvehicule.enums.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.*;
 
 @Entity
 @Table(name = "employe")
@@ -10,16 +15,19 @@ import tn.esprit.tpvehicule.enums.RoleEmploye;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Employe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmploye;
+    private Long id;
 
     private String nom;
+
     private String prenom;
 
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
+
+    @ManyToOne
+    private Agence agence;
 }

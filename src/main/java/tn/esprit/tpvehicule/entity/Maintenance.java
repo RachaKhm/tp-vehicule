@@ -1,9 +1,13 @@
 package tn.esprit.tpvehicule.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Table(name = "maintenance")
@@ -11,14 +15,18 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Maintenance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMaintenance;
+    private Long id;
 
     private LocalDate dateDebut;
+
     private LocalDate dateFin;
+
     private String description;
+
+    @ManyToOne
+    private Vehicule vehicule;
 }
