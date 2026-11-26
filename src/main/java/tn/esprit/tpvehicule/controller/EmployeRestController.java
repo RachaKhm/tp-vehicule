@@ -42,4 +42,14 @@ public class EmployeRestController {
     public Employe modifyEmploye(@RequestBody Employe c) {
         return employeService.modifyEmploye(c);
     }
+
+    @PutMapping("/desaffecter/{idEmploye}")
+    public Employe desaffecterEmploye(@PathVariable Long idEmploye) {
+        return employeService.desaffecterEmploye(idEmploye);
+    }
+
+    @PutMapping("/affecter/{idEmploye}/{idAgence}")
+    public Employe affecterEmploye(@PathVariable Long idEmploye, @PathVariable Long idAgence) {
+        return employeService.affecterEmploye(idEmploye, idAgence);
+    }
 }

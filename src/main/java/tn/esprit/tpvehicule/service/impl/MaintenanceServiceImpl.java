@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpvehicule.service.interfaces.IMaintenanceService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,5 +33,10 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
 
     public Maintenance modifyMaintenance(Maintenance maintenance) {
         return maintenanceRepository.save(maintenance);
+    }
+
+    @Override
+    public List<Maintenance> getMaintenancesBetweenDates(LocalDate dateDebut, LocalDate dateFin) {
+        return maintenanceRepository.findByDateFinBetween(dateDebut, dateFin);
     }
 }

@@ -1,9 +1,12 @@
 package tn.esprit.tpvehicule.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import tn.esprit.tpvehicule.entity.Reservation;
 import tn.esprit.tpvehicule.service.interfaces.IReservationService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -41,5 +44,15 @@ public class ReservationRestController {
     @PutMapping("/modify-reservation")
     public Reservation modifyReservation(@RequestBody Reservation c) {
         return reservationService.modifyReservation(c);
+    }
+
+    @GetMapping("/after-date")
+    public List<Reservation> getReservationsAfterDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return reservationService.getReservationsAfterDate(date);
+    }
+
+    @GetMapping("/before-date")
+    public List<Reservation> getReservationsBeforeDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return reservationService.getReservationsBeforeDate(date);
     }
 }

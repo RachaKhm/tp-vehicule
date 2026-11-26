@@ -1,6 +1,8 @@
 package tn.esprit.tpvehicule.service.interfaces;
 
 import tn.esprit.tpvehicule.entity.Maintenance;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IMaintenanceService {
@@ -9,4 +11,5 @@ public interface IMaintenanceService {
     public Maintenance addMaintenance(Maintenance c);
     public void removeMaintenance(Long maintenanceId);
     public Maintenance modifyMaintenance(Maintenance maintenance);
+    List<Maintenance> getMaintenancesBetweenDates(LocalDate dateDebut, LocalDate dateFin);
 }

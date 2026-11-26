@@ -1,9 +1,12 @@
 package tn.esprit.tpvehicule.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import tn.esprit.tpvehicule.entity.Maintenance;
 import tn.esprit.tpvehicule.service.interfaces.IMaintenanceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -41,5 +44,12 @@ public class MaintenanceRestController {
     @PutMapping("/modify-maintenance")
     public Maintenance modifyMaintenance(@RequestBody Maintenance c) {
         return maintenanceService.modifyMaintenance(c);
+    }
+
+    @GetMapping("/between-dates")
+    public List<Maintenance> getMaintenancesBetweenDates(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDebut,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFin) {
+        return maintenanceService.getMaintenancesBetweenDates(dateDebut, dateFin);
     }
 }

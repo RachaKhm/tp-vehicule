@@ -33,4 +33,14 @@ public class AgenceServiceImpl implements IAgenceService {
     public Agence modifyAgence(Agence agence) {
         return agenceRepository.save(agence);
     }
+
+    @Override
+    public List<Agence> getAgencesByVille(String ville) {
+        return agenceRepository.findByVille(ville);
+    }
+
+    @Override
+    public List<Agence> getAgencesByNomEndingWith(String nom) {
+        return agenceRepository.findByNomEndingWith(nom);
+    }
 }

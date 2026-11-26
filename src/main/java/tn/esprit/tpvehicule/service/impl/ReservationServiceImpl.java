@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpvehicule.service.interfaces.IReservationService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,4 +34,15 @@ public class ReservationServiceImpl implements IReservationService {
     public Reservation modifyReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
     }
+
+    @Override
+    public List<Reservation> getReservationsAfterDate(LocalDate date) {
+        return reservationRepository.findByDateDebutAfter(date);
+    }
+
+    @Override
+    public List<Reservation> getReservationsBeforeDate(LocalDate date) {
+        return reservationRepository.findByDateFinBefore(date);
+    }
+
 }
